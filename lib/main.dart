@@ -33,6 +33,10 @@ class MyHomePage extends StatelessWidget {
     )
   ];
 
+  void method() {
+    print('aqui');
+  }
+
   MyHomePage({super.key});
 
   @override
@@ -42,15 +46,14 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Despesas pessoais'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             width: double.infinity,
-            child: Card(
+            child: const Card(
               color: Color.fromRGBO(180, 72, 29, 1),
-              child: Text('Grafico'),
               elevation: 5,
+              child: Text('Grafico'),
             ),
           ),
           Column(children: <Widget>[
@@ -90,14 +93,37 @@ class MyHomePage extends StatelessWidget {
                         Text(
                           DateFormat('d MMM y').format(tr.date),
                           style: const TextStyle(color: Colors.grey),
-                        )
+                        ),
                       ],
                     )
                   ],
                 ),
               );
             }).toList(),
-          ])
+          ]),
+          const Card(
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Titulo'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Valor (R\$)'),
+                  ),
+                  OutlinedButton(
+                    onPressed: null,
+                    child: Text('Nova transação'),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromRGBO(100, 100, 100, 1))),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
