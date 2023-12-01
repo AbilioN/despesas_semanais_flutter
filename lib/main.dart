@@ -18,6 +18,8 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  String title;
+  String value;
   final _transactions = [
     Transaction(
       id: 't1',
@@ -108,17 +110,27 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    onChanged: (newValue) => title = newValue,
                     decoration: InputDecoration(labelText: 'Titulo'),
                   ),
                   TextField(
+                    onChanged: (newValue) => value = newValue,
                     decoration: InputDecoration(labelText: 'Valor (R\$)'),
                   ),
-                  OutlinedButton(
-                    onPressed: null,
-                    child: Text('Nova transação'),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromRGBO(100, 100, 100, 1))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      OutlinedButton(
+                        onPressed: null,
+                        child: Text(
+                          'Nova transação',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromRGBO(100, 100, 100, 1))),
+                      ),
+                    ],
                   )
                 ],
               ),
