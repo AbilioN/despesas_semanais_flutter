@@ -20,8 +20,8 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  String title = '';
-  String value = '';
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
   final _transactions = [
     Transaction(
       id: 't1',
@@ -38,19 +38,14 @@ class MyHomePage extends StatelessWidget {
   ];
 
   void _newTransaction() {
-    _transactions.add(Transaction(
-        id: Random().nextInt(100).toString(),
-        title: title,
-        value: double.parse(value),
-        date: DateTime.now()));
-  }
+    // _transactions.add(Transaction(
+    //     id: Random().nextInt(100).toString(),
+    //     title: title,
+    //     value: double.parse(value),
+    //     date: DateTime.now()));
 
-  void _changedTitle(string) {
-    title = string;
-  }
-
-  void _changedValue(newValue) {
-    value = newValue;
+    print(titleController.text);
+    print(valueController.text);
   }
 
   MyHomePage({super.key});
@@ -124,11 +119,11 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
-                    onChanged: _changedTitle,
+                    controller: titleController,
                     decoration: InputDecoration(labelText: 'Titulo'),
                   ),
                   TextField(
-                    onChanged: _changedValue,
+                    controller: valueController,
                     decoration: InputDecoration(labelText: 'Valor (R\$)'),
                   ),
                   Row(
