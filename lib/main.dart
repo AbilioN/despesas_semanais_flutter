@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:despesas_semanais_flutter/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,8 +20,8 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  String title;
-  String value;
+  String title = '';
+  String value = '';
   final _transactions = [
     Transaction(
       id: 't1',
@@ -35,8 +37,20 @@ class MyHomePage extends StatelessWidget {
     )
   ];
 
-  void method() {
-    print('aqui');
+  void _newTransaction() {
+    _transactions.add(Transaction(
+        id: Random().nextInt(100).toString(),
+        title: title,
+        value: double.parse(value),
+        date: DateTime.now()));
+  }
+
+  void _changedTitle(string) {
+    title = string;
+  }
+
+  void _changedValue(newValue) {
+    value = newValue;
   }
 
   MyHomePage({super.key});
@@ -103,33 +117,34 @@ class MyHomePage extends StatelessWidget {
               );
             }).toList(),
           ]),
-          const Card(
+          Card(
             elevation: 5,
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
                   TextField(
-                    onChanged: (newValue) => title = newValue,
+                    onChanged: _changedTitle,
                     decoration: InputDecoration(labelText: 'Titulo'),
                   ),
                   TextField(
-                    onChanged: (newValue) => value = newValue,
+                    onChanged: _changedValue,
                     decoration: InputDecoration(labelText: 'Valor (R\$)'),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       OutlinedButton(
-                        onPressed: null,
+                        onPressed: _newTransaction,
                         child: Text(
-                          'Nova transação',
+                          'Novo gasto',
                           style: TextStyle(color: Colors.white),
                         ),
                         style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll(
-                                Color.fromRGBO(100, 100, 100, 1))),
-                      ),
+                          Colors.purple.shade600,
+                        )),
+                      )
                     ],
                   )
                 ],
